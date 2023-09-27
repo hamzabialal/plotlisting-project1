@@ -1,0 +1,83 @@
+{% extends 'home.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="page-heading">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="top-text header-text">
+          <h6>Travelling </h6>
+          <h2>We Have Lots Of Categories of Travelling Places</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <div class="recent-listing">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-heading">
+            <h2>Recent Listing</h2>
+            <h6>Check Them Out</h6>
+          </div>
+        </div>
+
+        <div class="col-lg-12">
+          <div class="owl-carousel owl-listing">
+            {% for i in travelling_listings %}
+              {% if forloop.counter0|divisibleby:3 %}
+                <div class="item">
+              {% endif %}
+              <div class="listing-item">
+                <div class="left-image">
+                  <a href="#"><img src="{{ i.image.url }}" alt="" class="listing_image" height="380px"></a>
+                </div>
+                <div class="right-content align-self-center">
+                  <a href="#"><h4>{{ i.id }}. {{ i.title }}</h4></a>
+                  <h6>by: {{ i.listing_type }}</h6>
+                  {% if i.listing_type == 'Appartements' %}
+                    <h6>Area: {{ i.area }}</h6>
+                    <ul class="info">
+                      <li><img src="{% static 'assets/images/listing-icon-02.png' %}" alt=""> 6 Bedrooms</li>
+                      <li><img src="{% static 'assets/images/listing-icon-03.png' %}" alt=""> 4 Bathrooms</li>
+                    </ul>
+                  {% endif %}
+                  <ul class="rate">
+                    <li><i class="fa fa-star-o"></i></li>
+                    <li><i class="fa fa-star-o"></i></li>
+                    <li><i class="fa fa-star-o"></i></li>
+                    <li><i class="fa fa-star-o"></i></li>
+                    <li><i class="fa fa-star-o"></i></li>
+                    <li>({{ i.reviews }}) Reviews</li>
+                  </ul>
+                  <span class="price">
+                    <div class="icon">
+                      <img src="{% static 'assets/images/listing-icon-01.png' %}" alt="">
+                    </div> ${{ i.price }} / month with taxes
+                  </span>
+                  <span class="details">Details: <em>{{ i.details }}</em></span>
+                  <div class="main-white-button">
+                    <a href="{% url 'contact' %}"><i class="fa fa-eye"></i> Contact Now</a>
+                  </div>
+                </div>
+              </div>
+              {% if forloop.counter|divisibleby:3 or forloop.last %}
+                </div>
+              {% endif %}
+            {% endfor %}
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

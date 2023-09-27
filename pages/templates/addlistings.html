@@ -1,0 +1,77 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block content %}
+<div class="page-heading">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="top-text header-text">
+         <h2>Add Your Listings</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="contact-page">
+	<div class="container">
+	  <div class="row">
+		<div class="col-lg-12">
+			<div class="row">
+
+			  <div class="col-lg-6 align-self-center">
+				<form id="contact" action="" method="POST" enctype="multipart/form-data">
+				  <div class="row">
+					{% csrf_token %}
+					<div class="col-lg-12">
+						<label for="">Listing Type</label>
+                {{ form.listing_type }}
+
+                <script>
+                    document.getElementById("id_listing_type").addEventListener("change", function() {
+				    var areaField = document.getElementById("id_area");
+				    var locationField = document.getElementById("id_location");
+				    var areaLabel = document.querySelector('label[for="id_area"]');
+				    var locationLabel = document.querySelector('label[for="id_location"]');
+
+				    if (this.value === "Food and Life") {
+				        areaField.style.display = "none";
+				        locationField.style.display = "none";
+				        areaLabel.style.display = "none"; // Hide the area label
+				        locationLabel.style.display = "none"; // Hide the location label
+				    } else {
+				        areaField.style.display = "block";
+				        locationField.style.display = "block";
+				        areaLabel.style.display = "block"; // Show the area label
+				        locationLabel.style.display = "block"; // Show the location label
+				    }
+				});
+
+                </script>
+							<label for="id_area">Area:</label>
+							<input type="text" id="id_area" name="area">
+
+							<label for="id_location">Location:</label>
+							<input type="text" id="id_location" name="location">
+
+							<label for="">Price</label>
+							{{ form.price }}
+							<label for="">Title</label>
+							{{ form.title }}
+							<label for="">Upload An Image</label>
+							{{ form.image }}
+					</div>
+
+					<div class="col-lg-12">
+					  <fieldset>
+						<button type="submit" id="form-submit" class="main-button "><i class="fa fa-paper-plane"></i>Add Your Listing!</button>
+					  </fieldset>
+					</div>
+				  </div>
+				</form>
+			  </div>
+			</div>
+		</div>
+	  </div>
+	</div>
+</div>
+{% endblock content %}
